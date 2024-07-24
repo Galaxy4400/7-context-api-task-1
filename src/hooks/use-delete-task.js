@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { TASKS_RESORURSE } from "../constants/tasks-resourse";
-
+import { deleteTask } from "../api/tasks-api";
 
 export const useDeleteTask = (refreshTasks) => {
 	const [isDeleting, setIsDeleting] = useState(false);
@@ -8,14 +7,13 @@ export const useDeleteTask = (refreshTasks) => {
 	const removeHandler = (taskId) => {
 		setIsDeleting(true);
 
-		fetch(`${TASKS_RESORURSE}/${taskId}`, {
-			method: 'DELETE'
-		}).then(() => {
-			refreshTasks();
-		})
-		.finally(() => {
-			setIsDeleting(false);
-		});
+		deleteTask(taskId)
+			.then(() => {
+				refreshTasks();
+			})
+			.finally(() => {
+				setIsDeleting(false);
+			});
 	}
 
 	return { removeHandler, isDeleting };

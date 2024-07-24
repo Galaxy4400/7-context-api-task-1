@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { TASKS_RESORURSE } from "../constants/tasks-resourse";
+import { useState } from 'react';
+import { createTask } from '../api/tasks-api';
 
 export const useCreateTask = (refreshTasks) => {
 	const [isCreating, setIsCreating] = useState(false);
@@ -12,17 +12,14 @@ export const useCreateTask = (refreshTasks) => {
 
 		setIsCreating(true);
 
-		fetch(TASKS_RESORURSE, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify(Object.fromEntries(formData.entries())),
-		}).then(() => {
-			refreshTasks();
-			$form.reset();
-		})
-		.finally(() => {
-			setIsCreating(false);
-		});
+		createTask(formData)
+			.then(() => {
+				refreshTasks();
+				$form.reset();
+			})
+			.finally(() => {
+				setIsCreating(false);
+			});
 	};
 
 	return { createHandler, isCreating };

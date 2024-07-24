@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TASKS_RESORURSE } from "../constants/tasks-resourse";
+import { readTasks } from "../api/tasks-api";
 
 export const useGetTasks = (refreshTasksFlag, isSorting) => {
 	const [tasks, setTasks] = useState([]);
@@ -8,7 +8,7 @@ export const useGetTasks = (refreshTasksFlag, isSorting) => {
 	useEffect(() => {
 		setIsLoading(true);
 
-		fetch(`${TASKS_RESORURSE}${isSorting ? '?_sort=title' : ''}`)
+		readTasks(isSorting)
 			.then((response) => response.json())
 			.then(setTasks)
 			.finally(() => {

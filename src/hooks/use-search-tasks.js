@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { TASKS_RESORURSE } from '../constants/tasks-resourse';
 import { useDebounce } from './use-debounce';
+import { readTasks } from '../api/tasks-api';
 
 export const useSearchTasks = (setTasks, refreshTasks, isSorting) => {
 	const [searchTerm, setSearchTerm] = useState(false);
@@ -23,7 +23,7 @@ export const useSearchTasks = (setTasks, refreshTasks, isSorting) => {
 
 		setIsSearching(true);
 
-		fetch(`${TASKS_RESORURSE}?title_like=${debouncedSearchTerm}${isSorting ? '&_sort=title' : ''}`)
+		readTasks(isSorting, debouncedSearchTerm)
 			.then((response) => response.json())
 			.then((result) => {
 				setTasks(result);

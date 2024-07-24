@@ -12,7 +12,7 @@ export const List = () => {
 		<>
 			<ul className={`tasks-list ${loadingClass}`}>
 				{tasks.map(({ id, title }) => (
-					<Item {...{ id, title }} />
+					<Item {...{ id, title }} key={id} />
 				))}
 			</ul>
 			{isNothing && <div>Ничего не найдено</div>}

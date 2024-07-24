@@ -1,22 +1,24 @@
 import { useState } from "react";
-import { TASKS_RESORURSE } from "../constants/tasks-resourse";
+import { updateTask } from "../api/tasks-api";
 
 export const useUpdateTask = (refreshTasks) => {
 	const [isUpdating, setIsUpdating] = useState(false);
 
-	const updateHandler = (taskId, input) => {
+	const updateHandler = (event, taskId) => {
+		event.preventDefault();
+
+		const $form = event.target;
+		const formData = new FormData($form);
+
 		setIsUpdating(true);
 
-		fetch(`${TASKS_RESORURSE}/${taskId}`, {
-			method: 'PATCH',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({ title: input.value }),
-		}).then(() => {
-			refreshTasks();
-		})
-		.finally(() => {
-			setIsUpdating(false);
-		});
+		updateTask(taskId, formData)
+			.then(() => {
+				refreshTasks();
+			})
+			.finally(() => {
+				setIsUpdating(false);
+			});
 	};
 
 	return { updateHandler, isUpdating };
