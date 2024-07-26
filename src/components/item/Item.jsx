@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import { changeTask } from '../../helpers';
 import { useDeleteTask, useUpdateTask } from '../../hooks';
 import { AppContext } from '../../context';

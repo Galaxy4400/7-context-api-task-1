@@ -11,6 +11,8 @@ export const Form = () => {
 	const onCreate = (event) => {
 		event.preventDefault();
 
+		if (!formData.title) return;
+
 		createHandler(formData);
 
 		setFormData(defaultFormState);
