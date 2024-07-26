@@ -4,15 +4,12 @@ import { updateTask } from "../api/tasks-api";
 export const useUpdateTask = (refreshTasks) => {
 	const [isUpdating, setIsUpdating] = useState(false);
 
-	const updateHandler = (event, taskId) => {
-		event.preventDefault();
-
-		const $form = event.target;
-		const formData = new FormData($form);
-
+	const updateHandler = (taskId, input) => {
 		setIsUpdating(true);
 
-		updateTask(taskId, formData)
+		const updateData = { [input.name]: input.value };
+
+		updateTask(taskId, updateData)
 			.then(() => {
 				refreshTasks();
 			})

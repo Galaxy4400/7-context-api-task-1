@@ -9,11 +9,9 @@ export const Item = ({ id, title }) => {
 	const { removeHandler, isDeleting } = useDeleteTask(refreshTasks);
 	const { updateHandler, isUpdating } = useUpdateTask(refreshTasks);
 
-	const inputForm = useRef(null);
-
 	return (
 		<li className="tasks-list__item">
-			<form className="tasks-list__title" onSubmit={(event) => updateHandler(event, id)} ref={inputForm}>
+			<div className="tasks-list__title">
 				<span>{id}.</span>
 				<input
 					className="tasks-list__input"
@@ -21,10 +19,10 @@ export const Item = ({ id, title }) => {
 					name="title"
 					value={title}
 					onChange={({ target }) => changeTask(id, target, tasks, setTasks)}
-					onBlur={() => inputForm.current.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))}
+					onBlur={({ target }) => updateHandler(id, target)}
 					readOnly={isUpdating}
 				/>
-			</form>
+			</div>
 			<button className="tasks-list__remove" onClick={() => removeHandler(id)} disabled={isDeleting}>
 				Удалить
 			</button>
