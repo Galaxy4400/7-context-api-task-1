@@ -1,11 +1,11 @@
 import { TASKS_RESORURSE } from '../constants/tasks-resourse';
 
 
-export const createTask = (formData) => {
+export const createTask = (creatingData) => {
 	return fetch(TASKS_RESORURSE, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
-		body: JSON.stringify(Object.fromEntries(formData.entries())),
+		body: JSON.stringify(creatingData),
 	});
 };
 
