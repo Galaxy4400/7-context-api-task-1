@@ -22,11 +22,11 @@ export const readTasks = (isSorting = false, searchTearm = '') => {
 };
 
 
-export const updateTask = (taskId, updateData) => {
+export const updateTask = (taskId, updatingData) => {
 	return fetch(`${TASKS_RESORURSE}/${taskId}`, {
 		method: 'PATCH',
 		headers: { 'Content-Type': 'application/json;charset=utf-8' },
-		body: JSON.stringify(updateData),
+		body: JSON.stringify(updatingData),
 	});
 };
 

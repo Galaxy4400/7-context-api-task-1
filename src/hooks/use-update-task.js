@@ -7,9 +7,9 @@ export const useUpdateTask = (refreshTasks) => {
 	const updateHandler = (taskId, input) => {
 		setIsUpdating(true);
 
-		const updateData = { [input.name]: input.value };
+		const updatingData = { [input.name]: input.value };
 
-		updateTask(taskId, updateData)
+		updateTask(taskId, updatingData)
 			.then(() => {
 				refreshTasks();
 			})
