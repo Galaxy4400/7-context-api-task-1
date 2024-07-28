@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from './use-debounce';
 import { readTasks } from '../api/tasks-api';
 
-export const useSearchTasks = (setTasks, refreshTasks, isSorting) => {
+export const useSearchTasks = (setTasks, refreshTasks, sortingColumn) => {
 	const [searchTerm, setSearchTerm] = useState(false);
 	const [isSearching, setIsSearching] = useState(false);
 	const [searchCount, setSearchCount] = useState(null);
@@ -23,7 +23,7 @@ export const useSearchTasks = (setTasks, refreshTasks, isSorting) => {
 
 		setIsSearching(true);
 
-		readTasks(isSorting, debouncedSearchTerm)
+		readTasks(sortingColumn, debouncedSearchTerm)
 			.then((response) => response.json())
 			.then((result) => {
 				setTasks(result);

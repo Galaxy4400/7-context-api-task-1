@@ -6,21 +6,21 @@ import { Tasks } from './components';
 
 export const App = () => {
 	const [refreshTasksFlag, setRefreshTasksFlag] = useState(false);
-	const [isSorting, setIsSorting] = useState(false);
+	const [sortingColumn, setSortingColumn] = useState('order');
 
 	const refreshTasks = () => setRefreshTasksFlag(!refreshTasksFlag);
 
-	const { tasks, setTasks, isLoading } = useGetTasks(refreshTasksFlag, isSorting);
+	const { tasks, setTasks, isLoading } = useGetTasks(refreshTasksFlag, sortingColumn);
 	const { createHandler, isCreating } = useCreateTask(refreshTasks);
-	const { setSearchTerm, isSearching } = useSearchTasks(setTasks, refreshTasks, isSorting);
+	const { setSearchTerm, isSearching } = useSearchTasks(setTasks, refreshTasks, sortingColumn);
 
 	return (
 		<AppContext.Provider
 			value={{
 				createHandler,
 				isCreating,
-				isSorting,
-				setIsSorting,
+				sortingColumn,
+				setSortingColumn,
 				isLoading,
 				setSearchTerm,
 				tasks,

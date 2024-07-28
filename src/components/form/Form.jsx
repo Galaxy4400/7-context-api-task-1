@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react';
 import { AppContext } from '../../context';
+import { maxOrderValue } from '../../helpers';
 
 const defaultFormState = { title: '' };
 
 export const Form = () => {
-	const { createHandler, isCreating } = useContext(AppContext);
+	const { createHandler, isCreating, tasks } = useContext(AppContext);
 
 	const [formData, setFormData] = useState(defaultFormState);
 
@@ -13,7 +14,7 @@ export const Form = () => {
 
 		if (!formData.title) return;
 
-		createHandler(formData);
+		createHandler({ ...formData, order: maxOrderValue(tasks) + 1});
 
 		setFormData(defaultFormState);
 	};

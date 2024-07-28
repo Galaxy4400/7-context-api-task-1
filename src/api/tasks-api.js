@@ -10,10 +10,10 @@ export const createTask = (creatingData) => {
 };
 
 
-export const readTasks = (isSorting = false, searchTearm = '') => {
+export const readTasks = (sortingColumn = '', searchTearm = '') => {
 	const params = [];
 
-	if (isSorting) params.push(`_sort=title`);
+	if (sortingColumn) params.push(`_sort=${sortingColumn}`);
 	if (searchTearm) params.push(`title_like=${searchTearm}`);
 
 	const paramsString = params.length ? `?${params.join('&')}` : '';
